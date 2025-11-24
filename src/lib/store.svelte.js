@@ -27,7 +27,7 @@ export let store = $state({
 				alert(await response.text());
 			}
 		} catch (error) {
-			console.log('FEHLER');
+			console.log('FEHLER!');
 		}
 		store.listRabbits();
 	},
