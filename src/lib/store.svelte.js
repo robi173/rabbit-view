@@ -16,13 +16,7 @@ export let store = $state({
 			name: newName
 		};
 		try {
-			const response = await fetch(`http://${serverAddress}:7070/rabbits/` + id, {
-				method: 'PUT',
-				headers: {
-					'Content-Type': 'application/json'
-				},
-				body: JSON.stringify(editedRabbit)
-			});
+			const record = await pb.collection('rabbits').update(id, editedRabbit);
 			if (!response.ok) {
 				alert(await response.text());
 			}
@@ -32,9 +26,7 @@ export let store = $state({
 		store.listRabbits();
 	},
 	deleteRabbit: async function (id) {
-		const response = await fetch('http://' + serverAddress + ':7070/rabbits/' + id, {
-			method: 'DELETE'
-		});
+		await pb.collection('rabbits').delete(id);
 		store.listRabbits();
 	},
 	addRabbit: async (name) => {
