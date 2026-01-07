@@ -36,6 +36,7 @@
 		{:else}
 		<div></div>
 		{/if}
+		<a href={"/"+rabbit.id}>
 		<div class="pr-3">
 			<button
 				onclick={() => {
@@ -45,6 +46,7 @@
 				class="cursor-pointer"><Icon icon="carbon:edit" width="16" height="16" /></button
 			>
 		</div>
+	</a>
 		<div>
 			<button onclick={() => store.deleteRabbit(rabbit.id)} class="cursor-pointer text-red-500"
 				>x</button
