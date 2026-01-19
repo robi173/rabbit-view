@@ -37,7 +37,7 @@
 		<option value="halloween" onclick={saveTheme}>halloween</option>
 	</select>
 </nav>
-<main class="flex flex-col items-center justify-center">
+<main class="flex flex-col items-center justify-center min-h-screen">
 	{@render children?.()}
 </main>
 </div>
