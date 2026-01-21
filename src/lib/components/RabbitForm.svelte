@@ -6,10 +6,12 @@
 
 	let rabbit = $state({
 		name: "New Name",
-		rabbithole: ""
+		rabbithole: "",
+		rabbittype: ""
 	});
 
 	let rabbitholes = $state([]);
+	let rabbittypes = $state([]);
 
 
 	let wrongRabbitName = $derived(rabbit.name.length > 0 && rabbit.name[0] !== 'J');
@@ -24,13 +26,19 @@
 		goto('/');
 	}
 
+
 	$effect( async () => {
 		rabbitholes = await pb.collection('rabbitholes').getFullList();
+		rabbittypes = await pb.collection('rabbittypes').getFullList();
 		if(rabbitId) {
 			rabbit = Object.assign({},store.rabbits.find(rabbit  => rabbitId === rabbit.id))
 		}
 	});
-</script>
+
+	function RabbitsInHole(rabbitholeId) {
+			return store.rabbits.filter((rabbit) => rabbit.rabbithole === rabbitholeId).length;
+		}
+	</script>
 
 
 <div class="flex flex-col gap-2">
@@ -47,15 +55,27 @@
 	</label>
 
 	<div>
-		<label class="select">
-			<span class="label">Rabbithole</span>
-			<select bind:value={rabbit.rabbithole}>
-				{#each rabbitholes as rabbithole (rabbithole.id)}
-					<option value={rabbithole.id}>{rabbithole.name}</option>
-				{/each}
-			</select>
-		</label>
-	</div>
+	<label class="select">
+		<span class="label">Hasenbau</span>
+		<select bind:value={rabbit.rabbithole}>
+			{#each rabbitholes as rabbithole (rabbithole.id)}
+				<option disabled={RabbitsInHole(rabbithole.id) >= rabbithole.capacity} value={rabbithole.id}>{rabbithole.name}</option>
+			{/each}
+		</select>
+	</label>
+</div>
+
+	<div>
+	<label class="select">
+		<span class="label">Hasenart</span>
+		<select bind:value={rabbit.rabbittype}>
+			{#each rabbittypes as type (type.id)}
+				<option value={type.id}>{type.name}</option>
+			{/each}
+		</select>
+	</label>
+</div>
+
 
 	{#if wrongRabbitName}
 		<div role="alert" class="mt-4 alert alert-error">
