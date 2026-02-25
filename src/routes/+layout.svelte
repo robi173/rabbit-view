@@ -13,7 +13,6 @@
 	// unser "Konstruktor" (lifecycle hook) - läuft jedesmal, wenn die Seite bzw. die Komponente geladen wird:
 	$effect(() => {
 		store.listRabbits();
-		//store.listRabbitholes();
 		if(localStorage.getItem("theme"))
 		theme = localStorage.getItem("theme");
 		$inspect('🐰: ', store.rabbits);

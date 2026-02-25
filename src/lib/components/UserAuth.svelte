@@ -1,7 +1,7 @@
 <script>
 
 import {goto} from '$app/navigation';
-import {pb} from '$lib/store.svelte';
+import {pb, store} from '$lib/store.svelte';
 
 let email = $state('');
 let username = $state('');
@@ -27,8 +27,9 @@ async function loginUser() {
   const authData = await pb.collection('users').authWithPassword(
     email,
     password1,
-);
-goto('/');
+  );
+  store.listRabbits();
+  goto('/');
 }
 </script>
 
