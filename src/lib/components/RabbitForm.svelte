@@ -35,9 +35,11 @@
 		}
 	});
 
-	function RabbitsInHole(rabbitholeId) {
+	function RabbitsInHole(rabbitholeId) 
+	{
 			return store.rabbits.filter((rabbit) => rabbit.rabbithole === rabbitholeId).length;
 		}
+
 	</script>
 
 
@@ -54,7 +56,7 @@
 	
 	</label>
 
-	<div>
+<div>
 	<label class="select">
 		<span class="label">Hasenbau</span>
 		<select bind:value={rabbit.rabbithole}>
@@ -65,7 +67,7 @@
 	</label>
 </div>
 
-	<div>
+<div>
 	<label class="select">
 		<span class="label">Hasenart</span>
 		<select bind:value={rabbit.rabbittype}>
